@@ -6,8 +6,8 @@ import './App.css'
 
 function App() {
   return (
-    <div>
-      <h1>Hello World2</h1>
+    <div className="flex min-h-screen items-center justify-center bg-gray-950">
+      <h1 className="text-4xl font-bold text-white">Hello World00000</h1>
     </div>
   )
 }
