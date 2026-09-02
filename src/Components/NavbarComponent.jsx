@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
+import { Link, Links, useNavigate } from "react-router-dom";
 
 const NavbarComponent = () => {
   const user = useSelector((state) => state.user);
   const photoURL = user?.user?.photoUrl;
+  const navigate = useNavigate();
   return (
     <div className="navbar w-full bg-base-100 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Dev Tinder</a>
+        <Link to="/" className="btn btn-ghost text-xl">Dev Tinder</Link>
       </div>
       <div className="flex gap-2">
         <input
@@ -32,10 +34,10 @@ const NavbarComponent = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
+              <Link className="justify-between"  to="/profile">
                 Profile
                 <span className="badge">New</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a>Settings</a>
