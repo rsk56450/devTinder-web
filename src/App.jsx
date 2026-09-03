@@ -6,10 +6,12 @@ import Profile from "./Components/Profile.jsx";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import Feed from "./Components/Feed.jsx";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
   return (
     <>
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
       <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
@@ -21,6 +23,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Provider>
+      </ErrorBoundary>
     </>
   );
 }
