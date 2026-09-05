@@ -3,12 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Links, useNavigate } from "react-router-dom";
 import Constants from "../utils/constants";
 import { removeUser } from "../utils/Slices/userSlice";
+import { clearConnections } from "../utils/Slices/connectionSlice";
+import { removeFeed } from "../utils/Slices/feedSlice";
 
 const NavbarComponent = () => {
   const user = useSelector((state) => state.user);
   const photoURL = user?.user?.photoUrl;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const clearUserDataAfterLogout = () => {
+    dispatch(removeUser());
+    dispatch(clearConnections());
+    dispatch(removeFeed());
+    navigate("/login");
+  }
   const handleLogout = async () => {
     try {
       const res = await axios.post(`${Constants.BASE_URL}/auth/logout`, {}, {
@@ -17,12 +26,18 @@ const NavbarComponent = () => {
       console.log("=--- res --- ",res)
       
       if (res.status == 200) {
-    dispatch(removeUser());
-      navigate("/login");
+        clearUserDataAfterLogout();
     }
     } catch (error) {
       
     }
+  }
+  const handleConnections = () => {
+    navigate("/connections");
+  }
+
+  const handleMyConnections = () => {
+    navigate("/my-connections");
   }
   return (
     <div className="navbar w-full bg-base-100 shadow-sm">
@@ -63,6 +78,12 @@ const NavbarComponent = () => {
             </li>
             <li >
               <a onClick={handleLogout}>Logout</a>
+            </li>
+            <li >
+              <a onClick={handleConnections}>Connections Requests </a>
+            </li>
+            <li >
+              <a onClick={handleMyConnections}>My Connections</a>
             </li>
           </ul>
         </div>

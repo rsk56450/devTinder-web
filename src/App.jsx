@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import Feed from "./Components/Feed.jsx";
 import { ErrorBoundary } from "react-error-boundary";
+import Connections from "./Components/Connections.jsx";
+import MyConnectionsPage from "./Components/MyConnectionsPage.jsx";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
               <Route path="/" element={<Feed />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/connections" element={<Connections />} />
+              <Route path="/my-connections" element={<MyConnectionsPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
