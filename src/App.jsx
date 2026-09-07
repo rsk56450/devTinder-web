@@ -2,6 +2,7 @@ import NavbarComponent from "./Components/NavbarComponent.jsx";
 import Body from "./Components/Body.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login.jsx";
+import SignUp from "./Components/SignUp.jsx";
 import Profile from "./Components/Profile.jsx";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Body />}>
               <Route path="/" element={<Feed />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/my-connections" element={<MyConnectionsPage />} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/Slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Constants from "../utils/constants";
 
 const Login = () => {
@@ -64,6 +64,13 @@ const Login = () => {
           <button className="btn btn-neutral mt-4" onClick={handleLogin}>
             Login
           </button>
+
+          <p className="text-center mt-3 text-sm">
+            Don&apos;t have an account?{" "}
+            <Link to="/signup" className="link link-primary">
+              Sign Up
+            </Link>
+          </p>
         </fieldset>
       </div>
       {error && <div className="text-center text-red-500 my-10">{error}</div>}

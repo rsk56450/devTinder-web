@@ -7,13 +7,15 @@ import UserCard from './UserCard';
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const feed = useSelector((state) => state.feed?.data);
+  const feed = useSelector((state) => state.feed);
+
 
   const getFeed = async() => {
     try {
-     const res = await axios.get(`${Constants.BASE_URL}/user/requests/feed` , { withCredentials: true })
+      const res = await axios.get(`${Constants.BASE_URL}/user/requests/feed`, { withCredentials: true })
+      console.log("res -------  ", res);
       if (res.status == 200) {
-      dispatch(addFeed(res.data));
+      dispatch(addFeed(res.data?.data));
      }
     } catch (error) {
       console.error(error);
@@ -21,12 +23,12 @@ const Feed = () => {
   }
 
   useEffect(() => {
-    if (feed) return;
+    if (feed && feed.length > 0) return;
       getFeed()
     
   },[])
 
-  return (
+  return feed && feed.length > 0 ? (
     <>
     <div className="flex flex-col items-center justify-center gap-4 my-10">
   {feed?.map((user) => (
@@ -34,6 +36,10 @@ const Feed = () => {
   ))}
 </div>
     </>
+  ) : (
+    <div className="flex flex-col items-center justify-center gap-4 my-10">
+      <h1 className="text-2xl font-bold">No feed found</h1>
+    </div>
   )
 }
 
