@@ -4,20 +4,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import Constants from '../utils/constants';
 import { addFeed } from '../utils/Slices/feedSlice';
 import UserCard from './UserCard';
+import { useNavigate } from 'react-router-dom';
 
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((state) => state.feed);
-
+  const navigate = useNavigate();
 
   const getFeed = async() => {
     try {
       const res = await axios.get(`${Constants.BASE_URL}/user/requests/feed`, { withCredentials: true })
       console.log("res -------  ", res);
       if (res.status == 200) {
-      dispatch(addFeed(res.data?.data));
-     }
+        dispatch(addFeed(res.data?.data));
+        return;
+      }
+      
+      navigate("/login");
     } catch (error) {
+      navigate("/login");
       console.error(error);
     }
   }
